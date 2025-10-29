@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AbikusSudoTM — Projects</title>
+<link rel="preload" as="image" href="L.png">
+<link rel="preload" as="image" href="D.png">
+<link rel="stylesheet" href="style.css">
+<link id="favicon" rel="icon" type="image/png" href="D.png">
+</head>
+<body>
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-card">
+    <img class="loader-logo" src="Logo_D.png" alt="Logo">
+    <div class="loader-title">AbikusSudoTM</div>
+    <div class="loader-sub" id="loaderSub">Loading, please wait…</div>
+    <div class="progress-info" id="progressInfo">0%</div>
+  </div>
+</div>
+<header>
+  <div id="brand">
+    <img id="logo" alt="AbikusSudoTM logo" src="D.png" data-light="L.png" data-dark="D.png">
+    <div>
+      <div class="site-title">AbikusSudoTM</div>
+      <div class="site-sub" id="siteSub">Open-source projects showcase</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button id="themeBtn" class="btn ghost" title="Toggle light / dark theme">Toggle theme</button>
+    <a class="btn" href="https://github.com/abikussudo" target="_blank" rel="noopener">GitHub</a>
+    <input id="searchInput" type="text" placeholder="Search projects..." class="search-box">
+  </div>
+</header>
+<main>
+  <section class="intro">
+    <div class="intro-left">
+      <h2 id="introTitle">Hi — we are AbikusSudoTM</h2>
+      <p id="introText">We build small, useful open-source tools and utilities. Browse projects below. Click a card to see details, usage notes and repository links.</p>
+    </div>
+    <div class="intro-right">
+      <div class="intro-status-title" id="statusTitle">Status</div>
+      <div class="intro-status-wrap">
+        <span class="badge" id="statusBadge">Beta</span>
+      </div>
+    </div>
+  </section>
+  <section id="projects" class="projects-grid"></section>
+</main>
+<footer id="footer">TM 2025 AbikusSudo — Making codes for world.</footer>
+<div id="overlay" class="overlay" role="dialog" aria-hidden="true">
+  <div class="modal" id="modal" role="document" aria-modal="true">
+    <button id="closeModal" class="btn ghost modal-close">Close</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<script src="app.js" defer>
+</script>
+</body>
+
+</html>
+
+

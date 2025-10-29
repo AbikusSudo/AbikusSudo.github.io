@@ -1,0 +1,28 @@
+{
+  "projects": ["AbikusWebsite", "AbiJector", "UdaBI"],
+
+  "AbikusWebsite": {
+    "title": "AbikusWebsite",
+    "desc": "Main Abikus web page showcasing all open-source tools.",
+    "stat": "Stable",
+    "link": "https://abikussudo.github.io/",
+    "features": ["Responsive, lightweight design","Dynamic project loading"]
+  },
+
+  "AbiJector": {
+    "title": "AbiJector",
+    "desc": "Tool for injecting code snippets and assets into project builds.",
+    "stat": "Beta",
+    "link": "https://github.com/AbikusSudo/AbiJector",
+    "features": ["Fast project patching","JSON-based configuration"]
+  },
+  "UdaBI": {
+    "title": "UdaBI",
+    "desc": "UdaBI - a AI bot on g4f-based library.",
+    "stat": "Work In Progress",
+    "link": "https://abikussudo.github.io/UdaBI/",
+    "features": ["Full client-only (for GitHub Pages version)","Image and text generation"]
+  }
+}
+
+
