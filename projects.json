@@ -1,5 +1,5 @@
 {
-  "projects": ["AbikusWebsite", "AbiJector", "UdaBI"],
+  "projects": ["AbikusWebsite", "AbiJector", "InviZiblePC"],
 
   "AbikusWebsite": {
     "title": "AbikusWebsite",
@@ -16,13 +16,14 @@
     "link": "https://github.com/AbikusSudo/AbiJector",
     "features": ["Fast project patching","JSON-based configuration"]
   },
-  "UdaBI": {
-    "title": "UdaBI",
-    "desc": "UdaBI - a AI bot on g4f-based library.",
+  "InviZiblePC": {
+    "title": "Invizible Pro PC",
+    "desc": "Earlier, InviZible Pro was Android-only, but now I gived up and created this for PC too.",
     "stat": "Work In Progress",
-    "link": "https://abikussudo.github.io/UdaBI/",
-    "features": ["Full client-only (for GitHub Pages version)","Image and text generation"]
+    "link": "https://github.com/AbikusSudo/InviZiblePC/",
+    "features": ["Only windows created, no Linux.","Portable EXEcutable"]
   }
 }
+
 
 
