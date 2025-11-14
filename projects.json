@@ -1,5 +1,5 @@
 {
-  "projects": ["AbikusWebsite", "AbiJector", "InviZiblePC"],
+  "projects": ["AbikusWebsite", "AbiJector", "InviZiblePC", "AbikusGPT"],
 
   "AbikusWebsite": {
     "title": "AbikusWebsite",
@@ -22,8 +22,12 @@
     "stat": "Work In Progress",
     "link": "https://github.com/AbikusSudo/InviZiblePC/",
     "features": ["Only windows created, no Linux.","Portable EXEcutable"]
+  },
+  "AbikusGPT": {
+    "title": "AbikusGPT",
+    "desc": "A simple AI, working as Telegram bot. Nothing to say",
+    "stat": "Beta",
+    "link": "https://abikusgpt.abikussudo.workers.dev/",
+    "features": ["Uses TWH + CFW + HF API", "Simple interface", "Works in Telegram!"]
   }
 }
-
-
-
