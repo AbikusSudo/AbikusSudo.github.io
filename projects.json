@@ -1,12 +1,12 @@
 {
-  "projects": ["AbikusWebsite", "AbiJector", "InviZiblePC", "AbikusGPT"],
+  "projects": ["AbikusWebsite", "AbiJector", "Flux"],
 
   "AbikusWebsite": {
     "title": "AbikusWebsite",
     "desc": "Main Abikus web page showcasing all open-source tools.",
-    "stat": "Stable",
-    "link": "https://abikussudo.github.io/",
-    "features": ["Responsive, lightweight design","Dynamic project loading"]
+    "stat": "Stable?",
+    "link": "/",
+    "features": ["..."]
   },
 
   "AbiJector": {
@@ -16,18 +16,12 @@
     "link": "https://github.com/AbikusSudo/AbiJector",
     "features": ["Fast project patching","JSON-based configuration"]
   },
-  "InviZiblePC": {
-    "title": "Invizible Pro PC",
-    "desc": "Earlier, InviZible Pro was Android-only, but now I gived up and created this for PC too.",
-    "stat": "Work In Progress",
-    "link": "https://github.com/AbikusSudo/InviZiblePC/",
-    "features": ["Only windows created, no Linux.","Portable EXEcutable"]
-  },
-  "AbikusGPT": {
-    "title": "AbikusGPT",
-    "desc": "A simple AI, working as Telegram bot. Nothing to say",
-    "stat": "Beta",
-    "link": "https://abikusgpt.abikussudo.workers.dev/",
-    "features": ["Uses TWH + CFW + HF API", "Simple interface", "Works in Telegram!"]
+  "Flux": {
+    "title": "Flux Proxy",
+    "desc": "*Only for me and my friends... Sorry, I dont have money for VPS...",
+    "stat": "Alpha*",
+    "link": "http://fflluuxx.run.place/",
+    "features": ["..."]
   }
 }
+
