@@ -17,8 +17,8 @@
   const UI = {
     sub:"Open-source projects showcase",
     search:"Search projects...",
-    hi:"Hi — we are AbikusSudoTM",
-    intro:"We build small, useful open-source tools and utilities. Browse projects below. Click a card to see details, usage notes and repository links.",
+    hi:"Hi — I am AbikusSudo.",
+    intro:"I am build small, useful open-source tools and utilities. Browse projects below. Click a card to see details, usage notes and repository links.",
     status:"Status",
     details:"Details",
     link:"Open",
@@ -161,4 +161,5 @@
     boot();
   });
 })();
+
 
