@@ -1,10 +1,10 @@
 {
-  "projects": ["AbikusWebsite", "AbiJector", "Flux"],
+  "projects": ["AbikusWebsite", "AbiJector", "Flux", "Aetherium"],
 
   "AbikusWebsite": {
     "title": "AbikusWebsite",
     "desc": "Main Abikus web page showcasing all open-source tools.",
-    "stat": "Stable?",
+    "stat": "Stable i guess",
     "link": "/",
     "features": ["..."]
   },
@@ -18,10 +18,16 @@
   },
   "Flux": {
     "title": "Flux Proxy",
-    "desc": "*Only for me and my friends... Sorry, I dont have money for VPS...",
-    "stat": "Alpha*",
-    "link": "http://fflluuxx.run.place/",
-    "features": ["..."]
+    "desc": "A VPN configs collector (v1)",
+    "stat": "Alpha",
+    "link": "http://flux.2bd.net/",
+    "features": ["See by yourself"]
+  },
+  "Aetherium": {
+    "title": "Aetherium",
+    "desc": "A bridge between Russia and global network!",
+    "stat": "Beta Test",
+    "link": "aetherium.abikus.2bd.net"
+    "features": ["See in our TG channel: @AS_Aetherium"]
   }
 }
-
