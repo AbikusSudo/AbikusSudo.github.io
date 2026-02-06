@@ -21,7 +21,7 @@
     "title": "Flux",
     "desc": "A VPN configs collector (v1)",
     "stat": "Alpha",
-    "link": "http://flux.2bd.net/",
+    "link": "https://flux.2bd.net/",
     "features": ["See by yourself"]
   },
   
@@ -29,7 +29,7 @@
     "title": "Aetherium",
     "desc": "A bridge between Russia and global network!",
     "stat": "Beta Test",
-    "link": "aetherium.abikus.2bd.net",
+    "link": "https://aetherium.abikus.2bd.net",
     "features": ["See in our TG channel: @AS_Aetherium"]
   }
 }
