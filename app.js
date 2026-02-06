@@ -22,9 +22,7 @@
     status:"Status",
     details:"Details",
     link:"Open",
-    close:"Close",
-    loading1:"Preparing assets…",
-    loading2:"Fetching project list…"
+    close:"Close"
   };
 
   function applyUIText(){
@@ -111,44 +109,18 @@
     $('#modalContent').innerHTML='';
   }
 
-  function preloadImage(src){ return new Promise(res=>{ const img=new Image(); img.onload=img.onerror=()=>res(src); img.src=src; }); }
-  function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
-
   async function boot(){
     setTheme(currentTheme());
     applyUIText();
-    $('#loaderSub').textContent=UI.loading1;
-
-    const minMs=3000+Math.floor(Math.random()*2000);
-    const start=Date.now();
-    let fake=0;
-    const bar=$('#progressBar');
-    const info=$('#progressInfo');
-
-    const tick=setInterval(()=>{
-      const elapsed=Date.now()-start;
-      const target=Math.min(90, Math.floor(elapsed/minMs*95));
-      fake=Math.max(fake,target);
-      if(bar) bar.style.width=fake+'%';
-      if(info) info.textContent=fake+'%';
-    },120);
-
-    const real=(async()=>{
-      $('#loaderSub').textContent=UI.loading2;
-      const [_,__,data]=await Promise.all([
-        preloadImage('L.png'),
-        preloadImage('D.png'),
-        fetch('projects.json',{cache:'no-store'}).then(r=>r.json())
-      ]);
-      PROJECTS_DATA=data;
-    })();
-
-    await Promise.all([real,wait(minMs)]);
-    clearInterval(tick);
-    if(bar) bar.style.width='100%';
-    if(info) info.textContent='100%';
-    renderProjects('');
-    $('#loader').classList.add('hide');
+    
+    // Load data instantly
+    try {
+      const response = await fetch('projects.json',{cache:'no-store'});
+      PROJECTS_DATA = await response.json();
+      renderProjects('');
+    } catch (error) {
+      console.error('Failed to load projects:', error);
+    }
   }
 
   document.addEventListener('DOMContentLoaded',()=>{
