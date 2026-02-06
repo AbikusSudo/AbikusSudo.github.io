@@ -1,6 +1,6 @@
 {
   "projects": ["AbikusWebsite", "AbiJector", "Flux", "Aetherium"],
-
+  
   "AbikusWebsite": {
     "title": "Website",
     "desc": "Main Abikus web page showcasing all open-source tools.",
@@ -8,14 +8,15 @@
     "link": "/",
     "features": ["..."]
   },
-
+  
   "AbiJector": {
     "title": "AbiJector",
     "desc": "Tool for injecting code snippets and assets into project builds.",
     "stat": "Beta",
     "link": "https://github.com/AbikusSudo/AbiJector",
-    "features": ["Fast project patching","JSON-based configuration"]
+    "features": ["Fast project patching", "JSON-based configuration"]
   },
+  
   "Flux": {
     "title": "Flux",
     "desc": "A VPN configs collector (v1)",
@@ -23,13 +24,12 @@
     "link": "http://flux.2bd.net/",
     "features": ["See by yourself"]
   },
+  
   "Aetherium": {
     "title": "Aetherium",
     "desc": "A bridge between Russia and global network!",
     "stat": "Beta Test",
-    "link": "aetherium.abikus.2bd.net"
+    "link": "aetherium.abikus.2bd.net",
     "features": ["See in our TG channel: @AS_Aetherium"]
   }
 }
-
-
