@@ -1,52 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AbikusSudo</title>
-<link rel="preload" as="image" href="L.png">
-<link rel="preload" as="image" href="D.png">
-<link rel="stylesheet" href="style.css">
-<link id="favicon" rel="icon" type="image/png" href="D.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbikusSudo</title>
+    <link rel="stylesheet" href="style.css">
+    <link id="favicon" rel="icon" type="image/png" href="D.png">
 </head>
 <body>
-<header>
-  <div id="brand">
-    <img id="logo" alt="AbikusSudoTM logo" src="D.png" data-light="L.png" data-dark="D.png">
-    <div>
-      <div class="site-title">AbikusSudoTM</div>
-      <div class="site-sub" id="siteSub">Open-source projects showcase</div>
+    <nav>
+        <a href="#" class="nav-brand">
+            <img src="D.png" alt="Logo" class="nav-logo">
+            <span>AbikusSudo</span>
+        </a>
+        <div class="nav-controls">
+            <a href="#projects">Projects</a>
+            <a href="https://github.com/AbikusSudo" target="_blank">GitHub</a>
+            <button class="theme-btn" id="themeBtn">🌓</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Developer Tools</h1>
+        <p>Open-source utilities and tools for modern development workflows. Minimal, focused, and practical.</p>
+    </section>
+
+    <section class="projects-container" id="projects">
+        <div class="projects-header">
+            <h2>Projects</h2>
+            <input type="text" class="search-box" id="searchInput" placeholder="Search projects...">
+        </div>
+        
+        <div class="projects-grid" id="projectsGrid">
+            <div class="loading">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div id="modalContent">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="controls">
-    <button id="themeBtn" class="btn ghost" title="Toggle light / dark theme">Toggle theme</button>
-    <a class="btn" href="https://github.com/AbikusSudo" target="_blank" rel="noopener">GitHub</a>
-    <input id="searchInput" type="text" placeholder="Search projects..." class="search-box">
-  </div>
-</header>
-<main>
-  <section class="intro">
-    <div class="intro-left">
-      <h2 id="introTitle">Hi — I am AbikusSudo.</h2>
-      <p id="introText">I am build small, useful open-source tools and utilities. Browse projects below. Click a card to see details, usage notes and repository links.</p>
-    </div>
-    <div class="intro-right">
-      <div class="intro-status-title" id="statusTitle">Status</div>
-      <div class="intro-status-wrap">
-        <span class="badge" id="statusBadge">Beta</span>
-      </div>
-    </div>
-  </section>
-  <section id="projects" class="projects-grid"></section>
-</main>
-<footer id="footer">TM 2026 AbikusSudo</footer>
-<div id="overlay" class="overlay" role="dialog" aria-hidden="true">
-  <div class="modal" id="modal" role="document" aria-modal="true">
-    <button id="closeModal" class="btn ghost modal-close">Close</button>
-    <div id="modalContent"></div>
-  </div>
-</div>
-<script src="app.js" defer>
-</script>
+
+    <footer>
+        <p>TM 2025 AbikusSudo. Open source software.</p>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
