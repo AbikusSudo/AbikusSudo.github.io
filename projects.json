@@ -2,7 +2,7 @@
   "projects": ["AbikusWebsite", "AbiJector", "Flux", "Aetherium"],
 
   "AbikusWebsite": {
-    "title": "AbikusWebsite",
+    "title": "Website",
     "desc": "Main Abikus web page showcasing all open-source tools.",
     "stat": "Stable i guess",
     "link": "/",
@@ -31,3 +31,4 @@
     "features": ["See in our TG channel: @AS_Aetherium"]
   }
 }
+
