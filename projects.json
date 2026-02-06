@@ -17,7 +17,7 @@
     "features": ["Fast project patching","JSON-based configuration"]
   },
   "Flux": {
-    "title": "Flux Proxy",
+    "title": "Flux",
     "desc": "A VPN configs collector (v1)",
     "stat": "Alpha",
     "link": "http://flux.2bd.net/",
@@ -31,4 +31,5 @@
     "features": ["See in our TG channel: @AS_Aetherium"]
   }
 }
+
 
