@@ -1,135 +1,232 @@
-(function(){
-  const $ = (s,root=document) => root.querySelector(s);
-  const $$ = (s,root=document) => [...root.querySelectorAll(s)];
+(function() {
+    'use strict';
 
-  // THEME
-  function currentTheme(){ return document.documentElement.getAttribute('data-theme') || 'light'; }
-  function setTheme(theme){
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    const logo = $('#logo');
-    if(logo) logo.src = (theme==='dark')?logo.dataset.dark:logo.dataset.light;
-    const fav = $('#favicon');
-    if(fav) fav.href = (theme==='dark')?'D.png':'L.png';
-  }
+    // DOM helpers
+    const $ = (selector, context = document) => context.querySelector(selector);
+    const $$ = (selector, context = document) => Array.from(context.querySelectorAll(selector));
 
-  // UI TEXT
-  const UI = {
-    sub:"Open-source projects showcase",
-    search:"Search projects...",
-    hi:"Hi — I am AbikusSudo.",
-    intro:"I am build small, useful open-source tools and utilities. Browse projects below. Click a card to see details, usage notes and repository links.",
-    status:"Status",
-    details:"Details",
-    link:"Open",
-    close:"Close"
-  };
-
-  function applyUIText(){
-    $('#siteSub').textContent = UI.sub;
-    $('#searchInput').placeholder = UI.search;
-    $('#introTitle').textContent = UI.hi;
-    $('#introText').textContent = UI.intro;
-    $('#statusTitle').textContent = UI.status;
-    $('#closeModal').textContent = UI.close;
-  }
-
-  let PROJECTS_DATA = null;
-  function normalizeText(val){ return val || ''; }
-
-  function buildCard(name,p){
-    const desc = normalizeText(p.desc);
-    const stat = normalizeText(p.stat);
-    const link = p.link||'#';
-    const card = document.createElement('div');
-    card.className='card';
-    card.dataset.project=name;
-    card.innerHTML=`
-      <h3>${normalizeText(p.title)||name}</h3>
-      <p>${desc}</p>
-      <div class="meta">
-        ${stat?`<span class="badge">${stat}</span>`:''}
-        <a class="link" href="${link}" target="_blank" rel="noopener">${UI.link}</a>
-        <button class="link" data-action="open" data-project="${name}">${UI.details}</button>
-      </div>`;
-    return card;
-  }
-
-  function renderProjects(filterText=''){
-    const wrap = $('#projects');
-    wrap.innerHTML='';
-    if(!PROJECTS_DATA) return;
-    const list = Array.isArray(PROJECTS_DATA.projects)?PROJECTS_DATA.projects:[];
-    const q = filterText.trim().toLowerCase();
-    list.forEach(name=>{
-      const p = PROJECTS_DATA[name];
-      if(!p) return;
-      const title=(normalizeText(p.title)||name).toLowerCase();
-      const desc = normalizeText(p.desc).toLowerCase();
-      if(q && !(title.includes(q)||desc.includes(q))) return;
-      const card=buildCard(name,p);
-      wrap.appendChild(card);
-    });
-    wrap.classList.add('fade-in');
-    attachModalHandlers();
-  }
-
-  function attachModalHandlers(){
-    $$('[data-action="open"]').forEach(btn=>btn.addEventListener('click',()=>{
-      openModal(btn.dataset.project);
-    }));
-  }
-
-  function openModal(key){
-    if(!PROJECTS_DATA||!PROJECTS_DATA[key]) return;
-    const data=PROJECTS_DATA[key];
-    const title=normalizeText(data.title)||key;
-    const desc=normalizeText(data.desc);
-    const stat=normalizeText(data.stat);
-    const features=Array.isArray(data.features)?data.features:[];
-    const usage=Array.isArray(data.usage)?data.usage:[];
-    const links=Array.isArray(data.links)?data.links:[];
-    $('#modalContent').innerHTML=`
-      <h3>${title}</h3>
-      ${stat?`<span class="badge">${stat}</span>`:''}
-      ${desc?`<p>${desc}</p>`:''}
-      ${features.length?`<div><strong>Features:</strong><ul>${features.map(f=>`<li>${normalizeText(f)}</li>`).join('')}</ul></div>`:''}
-      ${usage.length?`<div><strong>Usage:</strong>${usage.map(u=>`<pre>${normalizeText(u)}</pre>`).join('')}</div>`:''}
-      ${links.length?`<div><strong>Links:</strong>${links.map(l=>`<a class="link" href="${l.url}" target="_blank">${normalizeText(l.label||l)}</a>`).join(' ')}</div>`:''}`;
-    const overlay=$('#overlay');
-    overlay.classList.add('open');
-    overlay.setAttribute('aria-hidden','false');
-  }
-
-  function closeModal(){
-    const overlay=$('#overlay');
-    if(!overlay) return;
-    overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden','true');
-    $('#modalContent').innerHTML='';
-  }
-
-  async function boot(){
-    setTheme(currentTheme());
-    applyUIText();
-    
-    // Load data instantly
-    try {
-      const response = await fetch('projects.json',{cache:'no-store'});
-      PROJECTS_DATA = await response.json();
-      renderProjects('');
-    } catch (error) {
-      console.error('Failed to load projects:', error);
+    // Theme management
+    function getTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
     }
-  }
 
-  document.addEventListener('DOMContentLoaded',()=>{
-    if($('#themeBtn')) $('#themeBtn').addEventListener('click',()=>setTheme(currentTheme()==='dark'?'light':'dark'));
-    const search=$('#searchInput');
-    if(search) search.addEventListener('input',e=>renderProjects(e.target.value||''));
-    $('#closeModal').addEventListener('click',closeModal);
-    $('#overlay').addEventListener('click', e=>{if(e.target.id==='overlay') closeModal();});
-    document.addEventListener('keydown', e=>{if(e.key==='Escape') closeModal();});
-    boot();
-  });
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        // Update favicon
+        const favicon = $('#favicon');
+        if (favicon) {
+            favicon.href = theme === 'dark' ? 'D.png' : 'L.png';
+        }
+    }
+
+    // Projects data
+    let projectsData = null;
+
+    // UI text
+    const UI = {
+        loading: "Loading projects...",
+        noResults: "No projects found matching your search.",
+        error: "Failed to load projects. Please try again.",
+        features: "Features",
+        usage: "Usage",
+        links: "Links",
+        open: "Open",
+        details: "Details",
+        close: "Close"
+    };
+
+    // Render projects
+    function renderProjects(filter = '') {
+        const container = $('#projectsGrid');
+        if (!container || !projectsData) return;
+
+        const searchTerm = filter.toLowerCase().trim();
+        const projects = projectsData.projects || [];
+
+        // Filter projects
+        const filteredProjects = projects.filter(projectKey => {
+            if (!searchTerm) return true;
+            
+            const project = projectsData[projectKey];
+            if (!project) return false;
+            
+            const title = (project.title || projectKey).toLowerCase();
+            const desc = (project.desc || '').toLowerCase();
+            const tags = (project.tags || []).join(' ').toLowerCase();
+            
+            return title.includes(searchTerm) || 
+                   desc.includes(searchTerm) || 
+                   tags.includes(searchTerm);
+        });
+
+        // Clear container
+        container.innerHTML = '';
+
+        if (filteredProjects.length === 0) {
+            container.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--muted);">
+                    ${UI.noResults}
+                </div>
+            `;
+            return;
+        }
+
+        // Render project cards
+        filteredProjects.forEach(projectKey => {
+            const project = projectsData[projectKey];
+            if (!project) return;
+
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.dataset.project = projectKey;
+
+            card.innerHTML = `
+                <h3>${project.title || projectKey}</h3>
+                <p>${project.desc || 'No description available.'}</p>
+                <div class="project-meta">
+                    <span class="project-badge">${project.stat || 'Active'}</span>
+                    <div class="project-links">
+                        ${project.link ? `<a href="${project.link}" target="_blank" class="project-link">${UI.open}</a>` : ''}
+                        <button class="project-link ghost" data-action="details" data-project="${projectKey}">
+                            ${UI.details}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(card);
+        });
+
+        // Attach event listeners
+        attachEventListeners();
+    }
+
+    // Open project details modal
+    function openModal(projectKey) {
+        if (!projectsData || !projectsData[projectKey]) return;
+
+        const project = projectsData[projectKey];
+        const modalContent = $('#modalContent');
+        const modal = $('#modalOverlay');
+
+        if (!modalContent || !modal) return;
+
+        modalContent.innerHTML = `
+            <h3>${project.title || projectKey}</h3>
+            <div class="modal-content">
+                <p>${project.desc || 'No description available.'}</p>
+                
+                ${project.features && project.features.length > 0 ? `
+                    <h4>${UI.features}</h4>
+                    <ul>
+                        ${project.features.map(feat => `<li>${feat}</li>`).join('')}
+                    </ul>
+                ` : ''}
+                
+                ${project.usage && project.usage.length > 0 ? `
+                    <h4>${UI.usage}</h4>
+                    <pre><code>${project.usage.join('\n')}</code></pre>
+                ` : ''}
+                
+                ${project.links && project.links.length > 0 ? `
+                    <h4>${UI.links}</h4>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+                        ${project.links.map(link => 
+                            `<a href="${link.url}" target="_blank" class="project-link">${link.label || link.url}</a>`
+                        ).join('')}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal
+    function closeModal() {
+        const modal = $('#modalOverlay');
+        if (!modal) return;
+
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        $('#modalContent').innerHTML = '';
+    }
+
+    // Attach event listeners
+    function attachEventListeners() {
+        // Details buttons
+        $$('[data-action="details"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const projectKey = btn.dataset.project;
+                openModal(projectKey);
+            });
+        });
+
+        // Search input
+        const searchInput = $('#searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                renderProjects(e.target.value);
+            });
+        }
+
+        // Theme toggle
+        const themeBtn = $('#themeBtn');
+        if (themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                const currentTheme = getTheme();
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                setTheme(newTheme);
+            });
+        }
+
+        // Modal close
+        $('#modalClose').addEventListener('click', closeModal);
+        $('#modalOverlay').addEventListener('click', (e) => {
+            if (e.target === $('#modalOverlay')) {
+                closeModal();
+            }
+        });
+
+        // Escape key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    }
+
+    // Initialize
+    async function init() {
+        try {
+            // Load projects data
+            const response = await fetch('projects.json');
+            projectsData = await response.json();
+            
+            // Set initial theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            
+            // Render projects
+            renderProjects();
+            
+        } catch (error) {
+            console.error('Failed to initialize:', error);
+            $('#projectsGrid').innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #dc2626;">
+                    ${UI.error}
+                </div>
+            `;
+        }
+    }
+
+    // Start when DOM is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
 })();
