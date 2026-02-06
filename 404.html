@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 — Not Found</title>
-  <link rel="stylesheet" href="https://abikusudo.github.io/style.css">
-  <link id="favicon" rel="icon" type="image/png" href="L.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404 - Page Not Found - AbikusSudo</title>
+<link rel="stylesheet" href="style.css">
+<link id="favicon" rel="icon" type="image/png" href="D.png">
 </head>
 <body>
-  <header id="topbar">
-    <img id="logo" src="L.png" data-light="L.png" data-dark="D.png" alt="Logo">
-    <nav>
-      <a href="https://abikusudo.github.io/">Home</a>
-      <a href="https://github.com/AbikusSudo">GitHub</a>
-      <button id="themeBtn">🌓</button>
-    </nav>
-  </header>
-
-  <main id="error-page">
-    <h1>404</h1>
-    <p>Page Not Found</p>
-    <a class="link" href="https://abikusudo.github.io/">Go Home</a>
-  </main>
-
-  <footer>
-    <p>AbikusSudo™ Open Source</p>
-  </footer>
-
-  <script src="https://abikusudo.github.io/app.js"></script>
+<header>
+  <div id="brand">
+    <img id="logo" alt="AbikusSudoTM logo" src="D.png">
+    <div>
+      <div class="site-title">AbikusSudoTM</div>
+      <div class="site-sub">404 - Page Not Found</div>
+    </div>
+  </div>
+  <div class="controls">
+    <a class="btn" href="index.html" rel="noopener">Home</a>
+  </div>
+</header>
+<main>
+  <div class="card" style="max-width: 600px; margin: 60px auto; text-align: center; padding: 40px;">
+    <div style="font-size: 72px; font-weight: 900; margin-bottom: 20px; color: #7c3aed;">404</div>
+    <h2 style="margin: 20px 0;">Page Not Found</h2>
+    <p style="margin-bottom: 30px; line-height: 1.6;">
+      The page you're looking for doesn't exist or has been moved. 
+      It might have been renamed, deleted, or is temporarily unavailable.
+    </p>
+    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+      <a href="index.html" class="btn" style="text-decoration: none;">
+        ← Back to Home
+      </a>
+      <a href="https://github.com/AbikusSudo" target="_blank" rel="noopener" class="btn ghost">
+        Visit GitHub
+      </a>
+    </div>
+    <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #e2e8f0;">
+      <h3 style="margin-bottom: 15px;">Suggestions:</h3>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+        <a href="index.html" class="badge" style="text-decoration: none;">View All Projects</a>
+        <a href="https://github.com/AbikusSudo?tab=repositories" target="_blank" rel="noopener" class="badge" style="text-decoration: none;">GitHub Repositories</a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <div>TM 2026 AbikusSudo</div>
+  <div style="margin-top: 8px; font-size: 12px; opacity: 0.7;">
+    If you believe this is an error, please 
+    <a href="https://github.com/AbikusSudo/AbikusSudo.github.io/issues" target="_blank" rel="noopener" style="color: #7c3aed;">report it</a>.
+  </div>
+</footer>
 </body>
 </html>
